@@ -1,0 +1,34 @@
+﻿@model Web_Tic_tac_toe.Models.AccountModels.LoginModel
+
+@{
+    ViewBag.Title = "AboutUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>Личный кабинет</h2>
+    <hr />
+    <div class="panel">
+        <span>
+            @Html.DisplayNameFor(model => model.Email)
+        </span>
+
+        <span>
+            @Html.DisplayFor(model => model.Email)
+        </span>
+    </div>
+    <br />
+
+
+    @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" class="btn btn-default btn-lg" value="Изменить пароль" />
+    }
+
+</div>
+<hr />
+<br /><br /><br />
+<p>
+    @Html.ActionLink("Вернуться на главную", "Index", "Home")
+</p>

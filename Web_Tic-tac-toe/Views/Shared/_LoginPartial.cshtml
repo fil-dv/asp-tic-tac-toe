@@ -1,0 +1,35 @@
+﻿@if (Session["isLogIn"] != null && (bool)Session["isLogIn"] == true )
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+         @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right  hidden-xs hidden-sm">
+            <li class="text-right">@Html.ActionLink(@Session["userName"].ToString(), "AboutUser", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>            
+            <li class="text-right">@Html.ActionLink("Выйти", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+        <div class="hidden-lg hidden-md hidden-print">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+                <li class="text-right">@Html.ActionLink(@Session["userName"].ToString(), "AboutUser", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                <li class="text-right">@Html.ActionLink("Выйти", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+        </div>
+    }
+}
+else
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
+            <li class="text-right">@Html.ActionLink("Зарегистрироваться", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li class="text-right">@Html.ActionLink("Войти", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+        <div class="hidden-lg hidden-md hidden-print">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+                <li class="text-right">@Html.ActionLink("Зарегистрироваться", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li class="text-right">@Html.ActionLink("Войти", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+        </div>
+    }
+}
