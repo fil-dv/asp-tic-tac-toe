@@ -22,6 +22,19 @@ CREATE TABLE Users([UserID] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 				   [isLogIn] bit not null); 
 GO
 
+ALTER TABLE Users
+ADD 
+	WinCount  int not null DEFAULT 0,
+	LossCount int not null DEFAULT 0,
+	DrawCount int not null DEFAULT 0; 
+
+GO
+
+ALTER TABLE Users
+DROP COLUMN isLogIn; 
+
+GO
+
 CREATE TABLE Games([GameID] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 				   [GameState] [nvarchar](255) not null); 
 GO

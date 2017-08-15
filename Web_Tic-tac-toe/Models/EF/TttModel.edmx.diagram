@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="66360514903a49949c92bdbdcfccd431" Name="Diagram1">
+        <EntityTypeShape EntityType="DbTTTModel.Game" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTTTModel.Room" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTTTModel.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DbTTTModel.FK__Rooms__GameID__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="DbTTTModel.FK__Rooms__User_1__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="DbTTTModel.FK__Rooms__User_2__412EB0B6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

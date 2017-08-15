@@ -11,33 +11,54 @@ namespace Web_Tic_tac_toe.Controllers
     {
         public ActionResult Index()
         {
-            List<Room> model = new List<Room>(); 
+            // List<Room> model = new List<Room>(); 
 
-            using (var context = new TttModel())
-            {
-                model = context.Rooms.Where(r => r.User1 != null).Where(r => r.User2 == null).ToList();
-                return View(model);
-            }            
+            var context = new DbTTTEntities();
+            List<Room> model = context.Rooms.Where(r => r.User1 != null).Where(r => r.User2 == null).ToList();
+            return View(model);
+
+            //using (var context = new TttModel())
+            //{
+            //    List<Room> model = context.Rooms.Where(r => r.User1 != null).Where(r => r.User2 == null).ToList();
+            //    ////List<Room> model1 = (from r in context.Rooms where (r.User1 != null && r.User2 == null)
+            //    ////                     select new Room
+            //    ////                     {
+            //    ////                         RoomID = r.RoomID,
+            //    ////                         GameID = r.GameID,
+            //    ////                         User_1 = r.User1.UserID,
+            //    ////                         User_2 = r.User2.UserID
+            //    ////                     }).ToList();
+
+            //    return View(model);
+            //}            
         }
 
         public ActionResult AddRoom()
         {
-            return View("Index");            
-        }
+            if (Session["userID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
-        [HttpPost]
-        public ActionResult AddRoom(int userId)
-        {
-            using (var context = new TttModel())
+            using (var context = new DbTTTEntities())
             {
                 Room room = new Room();
-                room.User1 = context.Users.Where(u => u.UserID == userId).First();
+                int userId = (int)Session["userID"];
+                List<User> users = context.Users.ToList();
+                User user = users.Where(u => u.UserID == userId).First();
+                room.User1 = user;
                 context.Rooms.Add(room);
                 context.SaveChanges();
 
                 return View("Index");
             }
         }
+
+        //[HttpPost]
+        //public ActionResult AddRoom(int userId)
+        //{
+            
+        //}
 
 
     }

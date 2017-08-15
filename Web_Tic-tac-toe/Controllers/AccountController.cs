@@ -26,7 +26,7 @@ namespace Web_UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new TttModel())
+                using (var context = new DbTTTEntities())
                 {
                     List<User> users = context.Users.Where(u => u.UserEmail == model.Email).ToList();
                     if (users.Count > 0)
@@ -65,7 +65,7 @@ namespace Web_UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new TttModel())
+                using (var context = new DbTTTEntities())
                 {
                     List<User> users = context.Users.Where(u => u.UserEmail == model.Email).ToList();
                     if (users.Count > 0)
@@ -109,7 +109,7 @@ namespace Web_UI.Controllers
         {
             if (Session["userID"] != null)
             {
-                using (var context = new TttModel())
+                using (var context = new DbTTTEntities())
                 {
                     int id;
                     if (Int32.TryParse(Session["userID"].ToString(), out id))
@@ -142,7 +142,7 @@ namespace Web_UI.Controllers
            
             if (Session["userID"] != null)
             {
-                using (var context = new TttModel())
+                using (var context = new DbTTTEntities())
                 {
                     int id;
                     if (Int32.TryParse(Session["userID"].ToString(), out id))

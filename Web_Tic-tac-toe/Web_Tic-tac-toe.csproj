@@ -166,10 +166,30 @@
     <Compile Include="Models\AccountModels\ChangePasswordModel.cs" />
     <Compile Include="Models\AccountModels\LoginModel.cs" />
     <Compile Include="Models\AccountModels\RegisterModel.cs" />
-    <Compile Include="Models\EF\Game.cs" />
-    <Compile Include="Models\EF\Room.cs" />
-    <Compile Include="Models\EF\TttModel.cs" />
-    <Compile Include="Models\EF\User.cs" />
+    <Compile Include="Models\EF\Game.cs">
+      <DependentUpon>TttModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\Room.cs">
+      <DependentUpon>TttModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\TttModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TttModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\TttModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TttModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\TttModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TttModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\User.cs">
+      <DependentUpon>TttModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,12 +199,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\EF\TttModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TttModel.edmx</DependentUpon>
+      <LastGenOutput>TttModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EF\TttModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TttModel.edmx</DependentUpon>
+      <LastGenOutput>TttModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\EF\TttModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TttModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EF\TttModel.edmx.diagram">
+      <DependentUpon>TttModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -228,6 +265,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

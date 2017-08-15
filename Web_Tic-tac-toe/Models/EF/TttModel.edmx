@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbTTTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="GameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameState" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_1" Type="int" />
+          <Property Name="User_2" Type="int" />
+          <Property Name="GameID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserEmail" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UserPass" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="WinCount" Type="int" Nullable="false" />
+          <Property Name="LossCount" Type="int" Nullable="false" />
+          <Property Name="DrawCount" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Rooms__GameID__4222D4EF">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rooms__User_1__403A8C7D">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="User_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rooms__User_2__412EB0B6">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="User_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTTTModelStoreContainer">
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Rooms__GameID__4222D4EF" Association="Self.FK__Rooms__GameID__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rooms__User_1__403A8C7D" Association="Self.FK__Rooms__User_1__403A8C7D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rooms__User_2__412EB0B6" Association="Self.FK__Rooms__User_2__412EB0B6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbTTTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="GameID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameState" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_1" Type="Int32" />
+          <Property Name="User_2" Type="Int32" />
+          <Property Name="GameID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Rooms__GameID__4222D4EF" FromRole="Rooms" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__Rooms__User_1__403A8C7D" FromRole="Rooms" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.FK__Rooms__User_2__412EB0B6" FromRole="Rooms" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPass" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WinCount" Type="Int32" Nullable="false" />
+          <Property Name="LossCount" Type="Int32" Nullable="false" />
+          <Property Name="DrawCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK__Rooms__GameID__4222D4EF" FromRole="Users" ToRole="Rooms" />
+          <NavigationProperty Name="Rooms1" Relationship="Self.FK__Rooms__User_1__403A8C7D" FromRole="Users" ToRole="Rooms" />
+          <NavigationProperty Name="Rooms2" Relationship="Self.FK__Rooms__User_2__412EB0B6" FromRole="Users" ToRole="Rooms" />
+        </EntityType>
+        <Association Name="FK__Rooms__GameID__4222D4EF">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rooms__User_1__403A8C7D">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="User_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rooms__User_2__412EB0B6">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="User_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTTTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Rooms__GameID__4222D4EF" Association="Self.FK__Rooms__GameID__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rooms__User_1__403A8C7D" Association="Self.FK__Rooms__User_1__403A8C7D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rooms__User_2__412EB0B6" Association="Self.FK__Rooms__User_2__412EB0B6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbTTTModelStoreContainer" CdmEntityContainer="DbTTTEntities">
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="DbTTTModel.Game">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="GameState" ColumnName="GameState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="DbTTTModel.Room">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="User_1" ColumnName="User_1" />
+                <ScalarProperty Name="User_2" ColumnName="User_2" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DbTTTModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+                <ScalarProperty Name="WinCount" ColumnName="WinCount" />
+                <ScalarProperty Name="LossCount" ColumnName="LossCount" />
+                <ScalarProperty Name="DrawCount" ColumnName="DrawCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
