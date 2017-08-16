@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
-footer {
+.center {
     text-align:center;
+}
+
+.photo{
+    text-align:center;    
 }

@@ -1,28 +1,44 @@
 ﻿@model List<Web_Tic_tac_toe.Models.EF.Room>
 
-@Html.Partial("_LoginPartial")
+
+    @Html.Partial("_LoginPartial")
+    
 
 
 <div>
-    <br />
-    <img src="..\Content\Images\ttt1.jpg" />
+    
+   
+    @*<div class="photo">
+        <img src="..\Content\Images\ttt1.jpg" />
+    </div>*@
 
-    @{
-        foreach (var item in Model)
-        {
-            if (item.User1 != null)
+    <div>
+        <h4>Доступные комнаты:</h4>
+    </div>
+    <div>
+        @{
+            foreach (var item in Model)
             {
-                <ul>
-                    <li class="my-margin">
-                        <a href="#">@item.User1.UserEmail</a>
-                    </li>
-                </ul>
+                if (item.User1 != null)
+                {
+                    <ul>
+                        <li class="my-margin">
+                            <a href="#">@item.User1.UserEmail</a>
+                        </li>
+                    </ul>
+                }
             }
         }
-    }
+    </div>
 
-    @Html.ActionLink("Create new room", "AddRoom", "Home", null, null)
-</div>
+    <hr />
+
+    <div>
+        @Html.ActionLink("Создать комнату", "AddRoom", "Home", null, new { @class = "btn btn-info" })
+    </div>
+
+    <hr />
+</div class="center">
 
 
 

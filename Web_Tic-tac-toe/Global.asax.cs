@@ -13,6 +13,9 @@ namespace Web_Tic_tac_toe
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            //RouteTable.Routes.MapHubs();
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
