@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Tic_tac_toe.Infrastructure.SignalR;
 using Web_Tic_tac_toe.Models.EF;
 
 namespace Web_Tic_tac_toe.Controllers
@@ -12,6 +13,10 @@ namespace Web_Tic_tac_toe.Controllers
         public ActionResult Index()
         {
             // List<Room> model = new List<Room>(); 
+
+            RoomsHub hub = new RoomsHub();  
+            hub.SendRooms("from controller");
+
 
             var context = new DbTTTEntities();
             List<Room> model = context.Rooms.Where(r => r.User1 != null).Where(r => r.User2 == null).ToList();
@@ -32,6 +37,7 @@ namespace Web_Tic_tac_toe.Controllers
             //    return View(model);
             //}            
         }
+
 
         public ActionResult AddRoom()
         {

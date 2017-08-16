@@ -15,6 +15,9 @@
     <div>
         <h4>Доступные комнаты:</h4>
     </div>
+
+    <div id="myDiv"></div>
+
     <div>
         @{
             foreach (var item in Model)
@@ -38,9 +41,41 @@
     </div>
 
     <hr />
-</div class="center">
+    <input type="button" id="sendMessage" value="Send"/>
+
+</div>
 
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+<script src="signalr/hubs"></script>
+<script type="text/javascript"></script>
+
+<script>
+    //alert("!");
+    $(function () {
+        alert("!");
+        var hub = $.connection.roomsHub;
+        hub.client.broadcastMessage = function (str) {
+            $('#myDiv').append('<p>' + str + '<p>');
+            alert(str);
+        }
+
+        $.connection.hub.start().done(function () {
+            $('#sendMessage').click(function () {
+                hub.server.sendRooms('Hello');
+            });
+        });
+
+        $('#sendMessage').click(function () {
+            $('#sendMessage').val(123);
+            alert("click!");
+           // hub.server.sendRooms('Hello');
+        });
+
+    });
+
+</script>
 
 
 

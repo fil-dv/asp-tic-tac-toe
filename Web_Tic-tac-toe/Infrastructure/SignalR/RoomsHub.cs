@@ -11,9 +11,16 @@ namespace Web_Tic_tac_toe.Infrastructure.SignalR
     [HubName ("HubOfRooms")]
     public class RoomsHub : Hub
     {
-        public void SendRooms(List<Room> roomList)
+        public void SendRooms(/*List<Room> roomList*/string str)
         {
-            Clients.All.broadcastMessage(roomList);
+
+            var context = GlobalHost.ConnectionManager.GetHubContext<RoomsHub>();
+            context.Clients.All.broadcastMessage(str);
+
+
+           
+            //Clients.All.broadcastMessage(roomList);
+            //Clients.All.broadcastMessage(str);
         }
     }
 }
