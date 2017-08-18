@@ -9,6 +9,10 @@ namespace Web_Tic_tac_toe.Models.AccountModels
     public class RegisterModel
     {
         [Required(ErrorMessage = "Обязательное поле")]
+        [Display(Name = "Имя:")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Email:")]
         [EmailAddress(ErrorMessage = "Некорректный адрес")]
         public string Email { get; set; }

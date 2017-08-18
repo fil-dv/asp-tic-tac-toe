@@ -18,13 +18,14 @@ GO
 
 
 CREATE TABLE Users([UserID] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+				   [UserName] [nvarchar](255) not null,
 				   [UserEmail] [nvarchar](255) not null,
 				   [UserPass] [nvarchar](255) not null,
 				   [WinCount]  int not null DEFAULT 0,
 				   [LossCount] int not null DEFAULT 0,
-				   [DrawCount] int not null DEFAULT 0); 
+				   [DrawCount] int not null DEFAULT 0,
+				   [ChatConnectID] nvarchar null); 
 GO
-
 
 CREATE TABLE Games([GameID] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 				   [GameState] [nvarchar](255) not null); 
@@ -39,3 +40,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+--drop table Games;
+--drop table Rooms;
+--drop table Users;

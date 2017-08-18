@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Web_Tic_tac_toe.Infrastructure.SignalR;
 using Web_Tic_tac_toe.Models.EF;
 
 namespace Web_Tic_tac_toe.Controllers
@@ -14,13 +13,14 @@ namespace Web_Tic_tac_toe.Controllers
         {
             // List<Room> model = new List<Room>(); 
 
-            RoomsHub hub = new RoomsHub();  
-            hub.SendRooms("from controller");
+           // RoomsHub hub = new RoomsHub();  
+           // hub.SendRooms("from controller");
 
 
             var context = new DbTTTEntities();
             List<Room> model = context.Rooms.Where(r => r.User1 != null).Where(r => r.User2 == null).ToList();
-            return View(model);
+            return View();
+            //return View(model);
 
             //using (var context = new TttModel())
             //{
@@ -57,14 +57,29 @@ namespace Web_Tic_tac_toe.Controllers
                 context.SaveChanges();
 
                 return View("Index");
-            }
+            }            
         }
 
-        //[HttpPost]
-        //public ActionResult AddRoom(int userId)
-        //{
+       
+        public ActionResult Chat()
+        {
+            if (Session["userID"] != null)
+            {
+                using (var context = new DbTTTEntities())
+                {
+                    int id = (int)Session["userID"];
+                    var users = context.Users.Where(u => u.UserID == id );
+                    User model = users.First();
+                    return PartialView(model);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            } 
+
             
-        //}
+        }
 
 
     }

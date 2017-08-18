@@ -1,4 +1,4 @@
-﻿@model List<Web_Tic_tac_toe.Models.EF.Room>
+﻿@*@model List<Web_Tic_tac_toe.Models.EF.Room>*@
 
 
     @Html.Partial("_LoginPartial")
@@ -18,7 +18,7 @@
 
     <div id="myDiv"></div>
 
-    <div>
+    @*<div>
         @{
             foreach (var item in Model)
             {
@@ -32,7 +32,7 @@
                 }
             }
         }
-    </div>
+    </div>*@
 
     <hr />
 
@@ -41,36 +41,63 @@
     </div>
 
     <hr />
-    <input type="button" id="sendMessage" value="Send"/>
+
+    <div>
+        @Html.ActionLink("Войти в чат", "Chat", "Home", null, new { @class = "btn btn-success" })
+    </div>
+
+    <div id="chat">
+        @{
+            if (Session["isLogIn"] != null)
+            {
+                @Html.Partial("Chat")
+            }
+        }
+    </div>
 
 </div>
 
 
+
+
+
+
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
-<script src="signalr/hubs"></script>
-<script type="text/javascript"></script>
+<script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+<!--<script src="signalr/hubs"></script>-->
+
 
 <script>
     //alert("!");
     $(function () {
-        alert("!");
-        var hub = $.connection.roomsHub;
-        hub.client.broadcastMessage = function (str) {
+        //alert("!");
+
+       
+        var connection = $.hubConnection("http://localhost:55639/");
+        var hub = connection.createHubProxy("myHub");
+       // var hub = $.connection.myHub;
+
+        $("button#add").click(function () {
+            var html = "<button class='alert'>Alert!</button>";
+            $("button.alert:last").parent().append(html);
+        });
+ 
+        hub.client.myHub = function (str) {
             $('#myDiv').append('<p>' + str + '<p>');
             alert(str);
         }
 
         $.connection.hub.start().done(function () {
             $('#sendMessage').click(function () {
-                hub.server.sendRooms('Hello');
+                hub.server.myHub('Hello');
             });
         });
 
         $('#sendMessage').click(function () {
-            $('#sendMessage').val(123);
+           
             alert("click!");
-           // hub.server.sendRooms('Hello');
+       
         });
 
     });

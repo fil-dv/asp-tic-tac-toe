@@ -6,9 +6,9 @@ using Microsoft.AspNet.SignalR;
 using Web_Tic_tac_toe.Models.EF;
 using Microsoft.AspNet.SignalR.Hubs;
 
-namespace Web_Tic_tac_toe.Infrastructure.SignalR
+namespace Web_Tic_tac_toe.Hubs
 {
-    [HubName ("HubOfRooms")]
+    [HubName ("myHub")]
     public class RoomsHub : Hub
     {
         public void SendRooms(/*List<Room> roomList*/string str)

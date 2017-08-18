@@ -28,6 +28,8 @@ namespace Web_Tic_tac_toe.Models.EF
         public int WinCount { get; set; }
         public int LossCount { get; set; }
         public int DrawCount { get; set; }
+        public string ChatConnectID { get; set; }
+        public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbTTTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DbTTTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Games">
           <Key>
             <PropertyRef Name="GameID" />
@@ -31,8 +31,10 @@
           <Property Name="WinCount" Type="int" Nullable="false" />
           <Property Name="LossCount" Type="int" Nullable="false" />
           <Property Name="DrawCount" Type="int" Nullable="false" />
+          <Property Name="ChatConnectID" Type="nvarchar" MaxLength="1" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Rooms__GameID__4222D4EF">
+        <Association Name="FK__Rooms__GameID__534D60F1">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
           <ReferentialConstraint>
@@ -44,7 +46,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rooms__User_1__403A8C7D">
+        <Association Name="FK__Rooms__User_1__5165187F">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
           <ReferentialConstraint>
@@ -56,7 +58,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Rooms__User_2__412EB0B6">
+        <Association Name="FK__Rooms__User_2__52593CB8">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
           <ReferentialConstraint>
@@ -72,21 +74,20 @@
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Rooms__GameID__4222D4EF" Association="Self.FK__Rooms__GameID__4222D4EF">
+          <AssociationSet Name="FK__Rooms__GameID__534D60F1" Association="Self.FK__Rooms__GameID__534D60F1">
             <End Role="Users" EntitySet="Users" />
             <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rooms__User_1__403A8C7D" Association="Self.FK__Rooms__User_1__403A8C7D">
+          <AssociationSet Name="FK__Rooms__User_1__5165187F" Association="Self.FK__Rooms__User_1__5165187F">
             <End Role="Users" EntitySet="Users" />
             <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
-          <AssociationSet Name="FK__Rooms__User_2__412EB0B6" Association="Self.FK__Rooms__User_2__412EB0B6">
+          <AssociationSet Name="FK__Rooms__User_2__52593CB8" Association="Self.FK__Rooms__User_2__52593CB8">
             <End Role="Users" EntitySet="Users" />
             <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DbTTTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -122,6 +123,8 @@
           <NavigationProperty Name="Rooms" Relationship="Self.FK__Rooms__GameID__4222D4EF" FromRole="Users" ToRole="Rooms" />
           <NavigationProperty Name="Rooms1" Relationship="Self.FK__Rooms__User_1__403A8C7D" FromRole="Users" ToRole="Rooms" />
           <NavigationProperty Name="Rooms2" Relationship="Self.FK__Rooms__User_2__412EB0B6" FromRole="Users" ToRole="Rooms" />
+          <Property Name="ChatConnectID" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__Rooms__GameID__4222D4EF">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
@@ -203,6 +206,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DbTTTModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ChatConnectID" ColumnName="ChatConnectID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
                 <ScalarProperty Name="UserPass" ColumnName="UserPass" />

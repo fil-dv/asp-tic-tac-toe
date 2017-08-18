@@ -37,6 +37,7 @@ namespace Web_UI.Controllers
                     else
                     {
                         User newUser = new User();
+                        newUser.UserName = model.Name;
                         newUser.UserEmail = model.Email;
                         newUser.UserPass = model.Password.GetHashCode().ToString();
                         context.Users.Add(newUser);
@@ -73,7 +74,7 @@ namespace Web_UI.Controllers
                         if (users[0].UserPass == model.Password.GetHashCode().ToString())
                         {
                             Session["isLogIn"] = true;
-                            Session["userName"] = users[0].UserEmail;
+                            Session["userName"] = users[0].UserName;
                             Session["userID"] = users[0].UserID;
                             return RedirectToAction("Index", "Home");
                         }
